@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GingerOracleDB", "GingerOracleDB\GingerOracleDB.csproj", "{4BEE1FF5-DBE0-4DE0-A837-CF99E8224419}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GingerOracleTest", "GingerOracleTest\GingerOracleTest.csproj", "{A01665B5-42A1-4383-833B-45C86F22A1BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BEE1FF5-DBE0-4DE0-A837-CF99E8224419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEE1FF5-DBE0-4DE0-A837-CF99E8224419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEE1FF5-DBE0-4DE0-A837-CF99E8224419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEE1FF5-DBE0-4DE0-A837-CF99E8224419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A01665B5-42A1-4383-833B-45C86F22A1BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A01665B5-42A1-4383-833B-45C86F22A1BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A01665B5-42A1-4383-833B-45C86F22A1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A01665B5-42A1-4383-833B-45C86F22A1BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAF0B575-4628-48A3-BE9B-E0627DB7EE15}
+	EndGlobalSection
+EndGlobal
