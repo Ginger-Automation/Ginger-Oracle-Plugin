@@ -1,4 +1,5 @@
 ﻿
+using Amdocs.Ginger.Plugin.Core;
 using Amdocs.Ginger.Plugin.Core.Database;
 using Amdocs.Ginger.Plugin.Core.Reporter;
 using Oracle.ManagedDataAccess.Client;
@@ -10,6 +11,7 @@ using System.Linq;
 
 namespace Oracle
 {
+    [GingerService("OracleService", "Oracle Database service")]
     public class GingerOracleConnection : IDatabase
     {
         private DbConnection Oconn = null;
