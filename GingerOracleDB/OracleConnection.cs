@@ -143,7 +143,7 @@ namespace Oracle
         {
             OracleCommand cmd = new OracleCommand()            
             {
-                Connection = (OracleConnection)Oconn,
+                Connection = conn,
                 CommandText = Query
             };
             cmd.ExecuteNonQuery();
