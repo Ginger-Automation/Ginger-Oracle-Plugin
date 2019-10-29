@@ -141,63 +141,18 @@ namespace Oracle
 
         public DataTable DBQuery(string Query)
         {
-            List<string> Headers = new List<string>();
-            List<List<string>> Records = new List<List<string>>();
-            bool IsConnected = false;
-            List<object> ReturnList = new List<object>();
-            DataTable dataTable = new DataTable();
-            DbDataReader reader = null;
-            try
+            OracleCommand cmd = new OracleCommand()            
             {
-                if (conn == null)
-                {
-                    IsConnected = OpenConnection(KeyvalParamatersList);
-                }
-                if (IsConnected || conn != null)
-                {
-                    DbCommand command = conn.CreateCommand();
-                    command.CommandText = Query;
-                    command.CommandType = CommandType.Text;
+                Connection = (OracleConnection)Oconn,
+                CommandText = Query
+            };
+            cmd.ExecuteNonQuery();
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            DataTable results = new DataTable();
+            da.Fill(results);
+            return results;
 
-                    // Retrieve the data.
-                    reader = command.ExecuteReader();
 
-                    // Create columns headers
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        Headers.Add(reader.GetName(i));
-                        dataTable.Columns.Add(reader.GetName(i));
-                    }
-
-                    while (reader.Read())
-                    {
-                        List<string> record = new List<string>();
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            record.Add(reader[i].ToString());
-                        }
-                        Records.Add(record);
-                        dataTable.Rows.Add(record);
-                    }
-
-                    ReturnList.Add(Headers);
-                    ReturnList.Add(Records);
-                }
-            }
-            catch (Exception e)
-            {
-                mReporter.ToLog2(eLogLevel.ERROR, "Failed to execute query:" + Query, e);
-                throw e;
-            }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-            }
-
-            return dataTable;
         }
 
         public int GetRecordCount(string Query)
