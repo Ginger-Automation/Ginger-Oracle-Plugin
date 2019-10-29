@@ -13,8 +13,7 @@ namespace Oracle
 {
     [GingerService("OracleService", "Oracle Database service")]
     public class GingerOracleConnection : IDatabase
-    {
-        private DbConnection Oconn = null;
+    {        
         private DbTransaction tran = null;
         public Dictionary<string, string> KeyvalParamatersList = new Dictionary<string, string>();
        
@@ -272,10 +271,11 @@ namespace Oracle
             DataTable table = conn.GetSchema("Tables");
             string tableName = "";
             foreach (DataRow row in table.Rows)
-            {
-                tableName = (string)row[2];
+            {                
+                tableName = (string)row[1];
+                rc.Add(tableName);
             }
-            rc.Add(tableName);
+            
             return rc;
         }
 

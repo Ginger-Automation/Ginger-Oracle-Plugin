@@ -11,7 +11,7 @@ namespace GingerOracleTest
     {
         public static GingerOracleConnection db = new GingerOracleConnection();
 
-        static string conn = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=host)(PORT=1521))(CONNECT_DATA=(sid=sid)));User Id=id;Password=pass;";
+        static string conn = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=illin056)(PORT=1521))(CONNECT_DATA=(sid=ATSDEVDB)));User Id=ATS_MAIN;Password=ATS_MAIN;";
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
