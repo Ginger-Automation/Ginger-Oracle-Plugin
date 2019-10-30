@@ -272,7 +272,7 @@ namespace Oracle
             string tableName = "";
             foreach (DataRow row in table.Rows)
             {                
-                tableName = (string)row[1];
+                tableName = (string)row[0] + "." +(string)row[1];
                 rc.Add(tableName);
             }
             
