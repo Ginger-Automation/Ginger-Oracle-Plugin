@@ -9,45 +9,43 @@ namespace GingerOracleTest
     [TestClass]
     public class OracleTest
     {
-        public static GingerOracleConnection db = new GingerOracleConnection();
-
-        static string conn = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=illin056)(PORT=1521))(CONNECT_DATA=(sid=ATSDEVDB)));User Id=ATS_MAIN;Password=ATS_MAIN;";
+        public static GingerOracleConnection mGingerOracleConnection;
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("ConnectionString", conn);
-            db.KeyvalParamatersList = param;
-            Boolean testconn = db.OpenConnection(param);
+            mGingerOracleConnection = new GingerOracleConnection();
+            mGingerOracleConnection.Protocol = "TCP";
+            mGingerOracleConnection.Host = "aa";
+            mGingerOracleConnection.Port = 1521;
+            mGingerOracleConnection.sid = "cc";
+            mGingerOracleConnection.UserId = "dd";
+            mGingerOracleConnection.Password = "ee";
+            mGingerOracleConnection.OpenConnection();
 
         }
 
-        [TestMethod]
-        public void OpenConnection()
-        {
-            //Arrange
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("ConnectionString", conn);
+        //[TestMethod]
+        //public void OpenConnection()
+        //{
+        //    //Arrange
+        //    Dictionary<string, string> param = new Dictionary<string, string>();
+        //    param.Add("ConnectionString", conn);
 
-            //Act
-            Boolean testconn = db.OpenConnection(param);
+        //    //Act
+        //    Boolean testconn = mGingerOracleConnection.OpenConnection(param);
 
-            //Assert
-            Assert.IsTrue(testconn);
-        }
+        //    //Assert
+        //    Assert.IsTrue(testconn);
+        //}
 
         [TestMethod]
         public void GetTableList()
         {
-            //Arrange
-            List<string> Tables = null;
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("ConnectionString", conn);
-            Boolean testconn = db.OpenConnection(param);
+            //Arrange            
             
             //Act
-            Tables = db.GetTablesList();
+            List<string> Tables = mGingerOracleConnection.GetTablesList();
 
             //Assert
             Assert.AreEqual(4, Tables.Count);
@@ -59,12 +57,11 @@ namespace GingerOracleTest
         [TestMethod]
         public void GetTablesColumns()
         {
-            //Arrange
-            List<string> Columns = null;
+            //Arrange            
             string tablename = "authors";
 
             //Act
-            Columns = db.GetTablesColumns(tablename);
+            List<string> Columns = mGingerOracleConnection.GetTablesColumns(tablename);
 
             //Assert
             Assert.AreEqual(4, Columns.Count);
@@ -73,58 +70,46 @@ namespace GingerOracleTest
             Assert.AreEqual("email", Columns[3]);
         }
 
-        [TestMethod]
-        public void RunUpdateCommand()
-        {
-            //Arrange
-            string upadateCommand = "UPDATE authors SET email='aaa@aa.com' where id=3";
-            string result = null;
+        //[TestMethod]
+        //public void RunUpdateCommand()
+        //{
+        //    //Arrange
+        //    string upadateCommand = "UPDATE authors SET email='aaa@aa.com' where id=3";
+        //    string result = null;
 
-            //Act
-            result = db.RunUpdateCommand(upadateCommand, false);
+        //    //Act
+        //    result = mGingerOracleConnection.RunUpdateCommand(upadateCommand, false);
 
-            //Assert
-            Assert.AreEqual(result, "1");
-        }
+        //    //Assert
+        //    Assert.AreEqual(result, "1");
+        //}
 
-        [TestMethod]
-        public void GetSingleValue()
-        {
-            //Arrange
-            string result = null;
-
-            //Act
-            result = db.GetSingleValue("authors", "name", "id=2");
-
-            //Assert
-            Assert.AreEqual(result, "Priya");
-        }
+        
 
         [TestMethod]
-        public void DBQuery()
+        public void ExeucuteQuery()
         {
-            //Arrange
-            DataTable result = null;
+            //Arrange            
 
             //Act
-            result = db.DBQuery("SELECT * FROM authors");
+            DataTable result = (DataTable)mGingerOracleConnection.ExecuteQuery("SELECT * FROM authors");
 
             //Assert
             Assert.AreEqual(result.Rows.Count, 3);
         }
 
-        [TestMethod]
-        public void GetRecordCount()
-        {
-            //Arrange
-            int a = 0;
+        //[TestMethod]
+        //public void GetRecordCount()
+        //{
+        //    //Arrange
+        //    int a = 0;
 
-            //Act
-            a = db.GetRecordCount("authors");
+        //    //Act
+        //    a = mGingerOracleConnection.GetRecordCount("authors");
 
-            //Assert
-            Assert.AreEqual(a, 3);
-        }
+        //    //Assert
+        //    Assert.AreEqual(a, 3);
+        //}
     }
 
 }
