@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ginger.Plugin.Core" Version="3.5.3" />
+    <PackageReference Include="Ginger.Plugin.Core" Version="3.5.4" />
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.50" />
   </ItemGroup>

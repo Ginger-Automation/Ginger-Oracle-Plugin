@@ -31,7 +31,7 @@ namespace Oracle
         public int Port { get; set; }
 
         [DatabaseParam("Sid")]        
-        public string sid { get; set; }
+        public string Sid { get; set; }
 
 
         [DatabaseParam("UserId")]        
@@ -44,22 +44,31 @@ namespace Oracle
         
 
         private IReporter mReporter;
-        
 
+
+        private string mConnectionString;
         public string ConnectionString
         {
             get
             {
-                string conn = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL={Protocol})(HOST={Host})(PORT={Port}))(CONNECT_DATA=(sid={sid})));User Id={UserId};Password={Password};";
-                return conn;
+                // Unless the user set the conn string we auto build it from params
+                if (mConnectionString != null)
+                {
+                    return mConnectionString;
+                }
+                else
+                {
+                    string conn = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL={Protocol})(HOST={Host})(PORT={Port}))(CONNECT_DATA=(sid={Sid})));User Id={UserId};Password={Password};";
+                    return conn;
+                }
+            }
+            set
+            {
+                mConnectionString = value;
             }
         }
-        //{
-        //    ConnectionString = parameters.FirstOrDefault(pair => pair.Key == "ConnectionString").Value;
-        //    User = parameters.FirstOrDefault(pair => pair.Key == "UserName").Value;
-        //    Password = parameters.FirstOrDefault(pair => pair.Key == "Password").Value;
-        //    TNS = parameters.FirstOrDefault(pair => pair.Key == "TNS").Value;
 
+        
         //    string connStr = null;
         //    bool res;
         //    res = false;
@@ -93,13 +102,8 @@ namespace Oracle
         //    return message;
         //}
 
-        //public bool TestConnection()
-        //{
-        //    conn = new OracleConnection();
-        //    conn.ConnectionString = ConnectionString;
-        //    conn.Open();
-        //    return true;
-        //}
+        
+
         public bool OpenConnection()
         {
             mOracleConnection = new OracleConnection(ConnectionString);
@@ -191,46 +195,12 @@ namespace Oracle
             da.Fill(results);
             return results;
         }
-
         
-
-        //public string GetSingleValue(string Table, string Column, string Where)
-        //{
-        //    string sql = "SELECT {0} FROM {1} WHERE {2}";
-        //    sql = String.Format(sql, Column, Table, Where);
-        //    String rc = null;
-        //    DbDataReader reader = null;
-        //    if (OpenConnection(KeyvalParamatersList))
-        //    {
-        //        try
-        //        {
-        //            DbCommand command = conn.CreateCommand();
-        //            command.CommandText = sql;
-
-        //            // Retrieve the data.
-        //            reader = command.ExecuteReader();
-        //            while (reader.Read())
-        //            {
-        //                rc = reader[0].ToString();
-        //                break; // We read only first row
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            throw e;
-        //        }
-        //        finally
-        //        {
-        //            reader.Close();
-        //        }
-        //    }
-        //    return rc;
-        //}
 
         public List<string> GetTablesColumns(string table)
         {
             DbDataReader reader = null;
-            List<string> rc = new List<string>() { "" };
+            List<string> rc = new List<string>();
             if ((mOracleConnection == null || string.IsNullOrEmpty(table)))
             {
                 return rc;
@@ -270,7 +240,7 @@ namespace Oracle
             DataTable table = mOracleConnection.GetSchema("Tables");            
             foreach (DataRow row in table.Rows)
             {                
-                tableName = (string)row[0] + "." +(string)row[1];
+                string tableName = (string)row[0] + "." +(string)row[1];
                 rc.Add(tableName);
             }
             
