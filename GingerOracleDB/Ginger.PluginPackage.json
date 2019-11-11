@@ -1,8 +1,0 @@
-{
-  "Id": "OracleDatabasePlugin",
-  "Version": "1.0.0",
-  "ProjectUrl": "git\\Pluginex1...",
-  "Description": "Oracle Database Plugin",
-  "Summary": "Oracle Database Plugin",
-  "StartupDll": "GingerOracleDB.dll"
-}
