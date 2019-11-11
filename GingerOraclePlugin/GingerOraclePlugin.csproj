@@ -1,16 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <ApplicationIcon />
     <OutputType>Exe</OutputType>
-    <StartupObject />
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Ginger.Plugin.Core" Version="3.5.7" />
     <PackageReference Include="GingerPluginPlatforms" Version="2.0.0.1" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
     <PackageReference Include="Oracle.ManagedDataAccess" Version="19.5.0" />
   </ItemGroup>
 

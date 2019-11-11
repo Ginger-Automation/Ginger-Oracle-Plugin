@@ -1,0 +1,12 @@
+[
+  {
+    "ServiceId": "OracleService",
+    "Description": null,
+    "IsSession": false,
+    "Interfaces": [
+      "IDatabase"
+    ],
+    "Actions": [],
+    "Configs": []
+  }
+]
